@@ -14,19 +14,14 @@ const animalSchema = new Schema(
             type:Number,
             default: 0,
         },
-        reseña:{
+        descripcion:{
             type:String,
             required:true,
         },
-        avatar:{
+        foto:{
             type:String,
             required: true,
         },
-        coleccion:{
-            type: [],
-            required:false,
-        }
-
     },
     {
         versionKey:false,

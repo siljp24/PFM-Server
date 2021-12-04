@@ -14,10 +14,6 @@ const voluntarioSchema = new Schema(
             type: String,
             required: true,
         },
-        avatar:{
-            type:String,
-            default: '',
-        },
         flag:{
             type: Boolean,
             required:true,

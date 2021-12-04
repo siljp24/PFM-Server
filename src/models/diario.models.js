@@ -1,14 +1,22 @@
 const { Schema, model } = require('mongoose');
 
 const diarioSchema = new Schema({
-    animal:{
+    idAnimal:{
         type:Schema.Types.ObjectId,
         ref:'Animal',
         required: true,
     }, 
-    suceso:{
+    foto:{
+        type:String,
+        required:true,
+    },
+    descripcion:{
         type:String,
         required: true,
+    },
+    fecha:{
+        type:String,
+        required:true,
     }
 },
 {
