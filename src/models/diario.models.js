@@ -24,4 +24,4 @@ const diarioSchema = new Schema({
     timestamps:true,
 })
 
-module.exports = model.apply('Diario', diarioSchema);
+module.exports = model('Diario', diarioSchema);

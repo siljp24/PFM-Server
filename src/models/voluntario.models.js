@@ -6,7 +6,7 @@ const voluntarioSchema = new Schema(
             type:String,
             required: true,
         },
-        contraseña:{
+        clave:{
             type:String,
             required: true,
         },
@@ -16,8 +16,8 @@ const voluntarioSchema = new Schema(
         },
         flag:{
             type: Boolean,
-            required:true,
-            default:true,
+            //required:true,
+            default:false,
         }
 
     },
