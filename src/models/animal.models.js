@@ -12,7 +12,7 @@ const animalSchema = new Schema(
         },
         edad:{
             type:Number,
-            default: 0,
+            required:true,
         },
         descripcion:{
             type:String,
