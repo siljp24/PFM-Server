@@ -1,14 +1,19 @@
 const models = require('../models');
+const config = require('../config');
+const values = require('../values');
 
 const crear = async (req, res) =>{
     try{
-        const { nombre, especie, edad, descripcion, foto } = req.body;
+        const { nombre, especie, edad, descripcion } = req.body;
+        console.log(req.body)
+        const file = req.file;
+        console.log(file)
         const animal = await models.animal.create({
             nombre, 
             especie,
             edad,
             descripcion,
-            foto,
+            foto: config.hostname + values.animal + '/' + file.filename,
         });
         return res.status(201).json({ animal });
     }catch(err){
