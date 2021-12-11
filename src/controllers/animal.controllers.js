@@ -5,9 +5,7 @@ const values = require('../values');
 const crear = async (req, res) =>{
     try{
         const { nombre, especie, edad, descripcion } = req.body;
-        console.log(req.body)
         const file = req.file;
-        console.log(file)
         const animal = await models.animal.create({
             nombre, 
             especie,
@@ -42,7 +40,8 @@ const obtener = async (req, res) =>{
 };
 const editar = async (req, res) =>{
     try{
-        const { nombre, especie, edad, descripcion, foto } = req.body;
+        const { nombre, especie, edad, descripcion } = req.body;
+        const file = req.file;
         const { idAnimal } = req.params;
         const animal = await models.animal.findById(idAnimal);
         if(!animal){
@@ -52,7 +51,7 @@ const editar = async (req, res) =>{
         animal.especie = especie;
         animal.edad = edad;
         animal.descripcion = descripcion;
-        animal.foto = foto;
+        animal.foto = config.hostname + values.animal + '/' + file.filename;
         await animal.save();
         return res.status(201).json({ animal });
     }catch(err){

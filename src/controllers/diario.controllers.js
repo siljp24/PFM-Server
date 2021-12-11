@@ -1,15 +1,18 @@
 const models = require('../models');
+const config = require('../config');
+const values = require('../values');
 
 const crear = async (req, res) =>{
     try{
-        const { idAnimal, foto, descripcion, fecha  } = req.body;
+        const { idAnimal, descripcion, fecha  } = req.body;
+        const file = req.file;
         const existe = await models.animal.findById(idAnimal);
         if(!existe){
             return res.status(404).json({ error: "No se encontró el animal"});
         };
         const diario = await models.diario.create({
             idAnimal,
-            foto,
+            foto: config.hostname + values.diario + '/' + file.filename,
             descripcion,
             fecha,
         });
@@ -48,7 +51,8 @@ const listar = async (req, res) =>{
 };
 const editar = async (req, res) =>{
     try{
-        const { idAnimal, foto, descripcion, fecha } = req.body;
+        const { idAnimal, descripcion, fecha } = req.body;
+        const file = req.file;
         const idDiario = req.params.idDiario;
         const animal = await models.animal.findById(idAnimal);
         if(!animal){
@@ -58,7 +62,7 @@ const editar = async (req, res) =>{
         if(!diario){
             return res.status(404).json({ error: "No se encontró el diario"});
         };
-        diario.foto = foto;
+        diario.foto = config.hostname + values.diario + '/' + file.filename;
         diario.descripcion = descripcion;
         diario.fecha = fecha;
         await diario.save();
