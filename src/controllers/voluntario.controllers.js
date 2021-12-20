@@ -26,7 +26,7 @@ const identificar = async (req, res) =>{
     try{
         const { email, clave } = req.body;
         const voluntario = await models.voluntario.findOne({ email });
-        if(!voluntario){
+        if(!voluntario.flag){
             return res.status(403).json({ error: "Voluntario no registrado o clave incorrecta"});
         };
         const comparar = await utils.bcrypt.comparar( clave, voluntario.clave);
