@@ -78,7 +78,7 @@ const eliminar = async (req, res) =>{
         if(!diario){
             return res.status(404).json({ error: "No se encontró el diario"});
         };
-        await models.diario.deleteOne({ diario });
+        await models.diario.findByIdAndDelete(diario._id);
         const diarios = await models.diario.find({idAnimal});
         return res.status(200).json({ diarios });
     }catch(err){

@@ -65,8 +65,8 @@ const eliminar = async (req, res) =>{
         if(!animal){
             return res.status(404).json({ error: "No se encontró el animal"});
         };
-        const diarios = await models.diario.deleteMany({idAnimal});
-        await models.animal.deleteOne(animal);
+        await models.diario.remove({ 'idAnimal': animal._id});
+        await models.animal.findByIdAndDelete(animal._id);
         const animales = await models.animal.find();
         return res.status(200).json({ animales });
     }catch(err){
