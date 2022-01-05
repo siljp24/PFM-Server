@@ -40,8 +40,17 @@ const identificar = async (req, res) =>{
     }
 };
 
-const eliminar = (req, res) =>{
-    res.json("eliminar voluntario");
+const eliminar = async (req, res) =>{
+    try{
+        const idVoluntario = req.headers;
+        if(!idVoluntario){
+            return res.status(403).json({ error: "Voluntario no encontrado"});
+        };
+        const remove = await models.voluntario.findByIdAndDelete(idVoluntario);
+        res.json("voluntario eliminado");
+    }catch(err){
+        return res.status(500).json({ error: err});
+    }
 };
 
 module.exports = {
