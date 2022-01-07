@@ -53,8 +53,30 @@ const eliminar = async (req, res) =>{
     }
 };
 
+const actualizar = async (req, res) =>{
+    try{
+        const { email, clave, nombre, telefono, direccion } = req.body;
+        const voluntario = await models.voluntario.findOne({ email });
+        if(!voluntario){
+            return res.status(403).json({ error: 'Voluntario no existe'});
+        };
+        const claveBcrypt = await utils.bcrypt.encriptar(clave);
+        const newVoluntario = {
+            clave: claveBcrypt,
+            nombre,
+            direccion,
+            telefono
+        }
+        const data = await models.voluntario.updateOne({_id: voluntario._id }, newVoluntario);
+        return res.status(201).json({ data });
+    }catch(err){
+        return res.status(500).json({ error: err});
+    }
+};
+
 module.exports = {
     crear,
     eliminar,
     identificar,
+    actualizar,
 }

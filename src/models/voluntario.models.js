@@ -14,9 +14,16 @@ const voluntarioSchema = new Schema(
             type: String,
             required: true,
         },
+        direccion:{
+            type: String,
+            required: false,
+        },
+        telefono:{
+            type: Number,
+            required: false,
+        },
         flag:{
             type: Boolean,
-            //required:true,
             default:false,
         }
 

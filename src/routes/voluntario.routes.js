@@ -4,6 +4,7 @@ const middleware = require('../middlewares');
 const router = Router();
 
 router.post('/crearVoluntario', controllers.voluntario.crear);
+router.put('/actualizarVoluntario', controllers.voluntario.actualizar);
 router.post('/identificarVoluntario', controllers.voluntario.identificar);
 router.delete('/eliminarVoluntario', middleware.voluntario.token, controllers.voluntario.eliminar); 
 
