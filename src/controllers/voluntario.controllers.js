@@ -47,7 +47,7 @@ const eliminar = async (req, res) =>{
             return res.status(403).json({ error: "Voluntario no encontrado"});
         };
         const remove = await models.voluntario.findByIdAndDelete(idVoluntario);
-        res.json("voluntario eliminado");
+        res.status(200).json("voluntario eliminado");
     }catch(err){
         return res.status(500).json({ error: err});
     }
@@ -68,10 +68,24 @@ const actualizar = async (req, res) =>{
             telefono
         }
         const data = await models.voluntario.updateOne({_id: voluntario._id }, newVoluntario);
-        return res.status(201).json({ data });
+        return res.status(200).json({ data });
     }catch(err){
         return res.status(500).json({ error: err});
     }
+};
+
+const obtener = async (req,res) => {
+    try{
+        const idVoluntario = req.headers;
+        const voluntario = await models.voluntario.findById(idVoluntario);
+        if(!voluntario){
+            return res.status(403).json({ error: "No se encontró voluntario"});
+        }
+        return res.status(200).json({voluntario});
+    }catch(err){
+        return res.status(500).json({ error: err });
+    }
+    
 };
 
 module.exports = {
@@ -79,4 +93,5 @@ module.exports = {
     eliminar,
     identificar,
     actualizar,
+    obtener,
 }
