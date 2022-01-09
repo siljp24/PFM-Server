@@ -62,7 +62,9 @@ const editar = async (req, res) =>{
         if(!diario){
             return res.status(404).json({ error: "No se encontró el diario"});
         };
-        diario.foto = config.hostname + values.diario + '/' + file.filename;
+        if(file !== undefined){
+            diario.foto = config.hostname + values.diario + '/' + file.filename;
+        }
         diario.descripcion = descripcion;
         diario.fecha = fecha;
         await diario.save();
