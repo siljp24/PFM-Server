@@ -51,7 +51,9 @@ const editar = async (req, res) =>{
         animal.especie = especie;
         animal.edad = edad;
         animal.descripcion = descripcion;
-        animal.foto = config.hostname + values.animal + '/' + file.filename;
+        if(file !== undefined){
+            animal.foto = config.hostname + values.animal + '/' + file.filename;
+        }
         await animal.save();
         return res.status(201).json({ animal });
     }catch(err){
