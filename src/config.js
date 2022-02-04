@@ -15,7 +15,7 @@ const config = {
             cb(null, './src/statics/' + values.diario);
         },
     },
-    hostname: 'http://reservanimal.herokuapp.com/',
+    hostname: 'https://reservanimal.herokuapp.com/',
 };
 
 module.exports = config;

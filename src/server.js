@@ -5,7 +5,7 @@ const cors = require('cors');
 const server = express();
 
 //Settings
-server.set('PORT', 4500);
+server.set('PORT', process.env.PORT ?? 4500);
 //Middlewares
 server.use(cors());
 server.use(express.json());
